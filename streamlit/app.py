@@ -5,17 +5,31 @@ from haversine import haversine
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
 from datetime import datetime
-
 import os
 from PIL import Image
 
 # ---------------- Landing Page ----------------
-st.title("🧠 Numen Kiosk Intelligence")
-    st.caption("Real-time intelligence for Bitcoin ATM network")
+st.markdown(
+    """
+<div style="display: flex; align-items: center; justify-content: space-between;">
+    <h1 style='margin-bottom: 0;'>Numen Kiosk Intelligence</h1>
+    <img 
+        src="https://raw.githubusercontent.com/numen1/TEST_kiosk-dashboard/main/streamlit/assets/mascot.png"
+        title="Numen watches all 👁‍🗨"
+        width="120"
+        style="margin-right: 20px; border-radius: 8px; opacity: 0.95;"
+    />
+</div>
+<p style='margin-top: -10px; color: gray; font-size: 0.9rem;'>
+    Real-time intelligence for Bitcoin ATM network
+</p>
+""",
+    unsafe_allow_html=True,
+)
 
 st.markdown(
     """
-Welcome to the **Numen Dashboard** — a strategic interface for visualizing and optimizing NBA Kiosk performance.
+Welcome to the **Numen Dashboard** — a strategic interface for visualizing and optimizing Bitcoin ATM performance.
 
 **Key Features**:
 - 📊 Filter by state, performance, and clustering  
@@ -24,23 +38,14 @@ Welcome to the **Numen Dashboard** — a strategic interface for visualizing and
 - 📦 Export data for operations and board reviews  
 """
 )
+
 st.divider()
-st.markdown(
-    """
-    <div style="position: absolute; top: 10px; right: 20px; z-index: 999;">
-        <img src="https://raw.githubusercontent.com/numen1/TEST_kiosk-dashboard/main/streamlit/assets/mascot.png" 
-             title="Numen watches all 👁‍🗨"
-             width="60"
-             style="opacity: 0.92; border-radius: 8px;"
-        />
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+
 
 BREAK_EVEN = 4900
 df = pd.read_csv("data/Numen_Kiosk_Dataset.csv")
 df["avg_volume"] = df["avg_volume"].clip(lower=0)
+
 
 # Cluster Detection
 def detect_clusters(data, radius=5):
@@ -55,9 +60,12 @@ def detect_clusters(data, radius=5):
         clustered_flags.append(count > 0)
     return clustered_flags
 
+
 df["is_clustered"] = detect_clusters(df)
 df["cluster_label"] = df["is_clustered"].map({True: "C", False: ""})
-df["tier"] = df["avg_volume"].apply(lambda v: "High" if v >= 6500 else "Mid" if v >= 4000 else "Low")
+df["tier"] = df["avg_volume"].apply(
+    lambda v: "High" if v >= 6500 else "Mid" if v >= 4000 else "Low"
+)
 df["plot_volume"] = df["avg_volume"]
 df["redeploy_flag"] = df["avg_volume"] < 3000
 
@@ -93,10 +101,7 @@ filter_context = " | ".join(active_filters) if active_filters else "All Kiosks"
 
 # Zoom & Map Center
 zoom = 4 if state_filter == "All" else 6
-map_center = {
-    "lat": filtered["latitude"].mean(),
-    "lon": filtered["longitude"].mean()
-}
+map_center = {"lat": filtered["latitude"].mean(), "lon": filtered["longitude"].mean()}
 
 # KPI Calculations
 avg_vol = int(filtered["avg_volume"].mean())
@@ -121,7 +126,11 @@ col4.metric("% Low Performers", f"{low_perf_pct:.1f}%")
 # 💰 Financial Insights
 st.markdown(f"### 💰 Financial Insights ({filter_context})")
 col5, col6, col7 = st.columns(3)
-col5.metric("Avg Volume", f"${avg_vol:,}", delta_color=("normal" if avg_vol >= BREAK_EVEN else "inverse"))
+col5.metric(
+    "Avg Volume",
+    f"${avg_vol:,}",
+    delta_color=("normal" if avg_vol >= BREAK_EVEN else "inverse"),
+)
 col6.metric("P/L per Kiosk", f"${avg_pl:+,}", delta_color="normal")
 col7.metric("Loss from Unprofitable", f"${loss_total:,}")
 
@@ -144,7 +153,14 @@ fig_map = px.scatter_mapbox(
     lat="latitude",
     lon="longitude",
     hover_name="kiosk_id",
-    hover_data=["tier", "avg_volume", "transactions", "host", "location_type", "is_clustered"],
+    hover_data=[
+        "tier",
+        "avg_volume",
+        "transactions",
+        "host",
+        "location_type",
+        "is_clustered",
+    ],
     color="tier",
     size="plot_volume",
     text="cluster_label",
@@ -152,17 +168,19 @@ fig_map = px.scatter_mapbox(
     mapbox_style="open-street-map",
     zoom=zoom,
     center=map_center,
-    height=600
+    height=600,
 )
 fig_map.update_traces(textposition="top center")
 st.plotly_chart(fig_map, use_container_width=True)
 
 # 📍 Regional Density
 st.subheader(f"📍 Regional Density ({filter_context})")
-st.markdown("""🧠 **Numen Insight**
+st.markdown(
+    """🧠 **Numen Insight**
 This heatmap shows kiosk volume concentration across the selected region.
 Use this view to detect over-saturation, identify high-potential low-density zones,
-and plan future deployments or redeployments with precision.""")
+and plan future deployments or redeployments with precision."""
+)
 
 fig_density = px.density_map(
     filtered,
@@ -172,7 +190,7 @@ fig_density = px.density_map(
     radius=20,
     center=map_center,
     zoom=zoom,
-    map_style="open-street-map"
+    map_style="open-street-map",
 )
 st.plotly_chart(fig_density, use_container_width=True)
 
