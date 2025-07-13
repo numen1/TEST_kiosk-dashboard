@@ -10,25 +10,12 @@ import os
 from PIL import Image
 
 # ---------------- Landing Page ----------------
-st.markdown(
-    """
-    <div style="display: flex; align-items: center; justify-content: space-between;">
-        <h1 style='margin-bottom: 0;'>Numen Kiosk Intelligence</h1>
-        <img 
-            src="https://raw.githubusercontent.com/numen1/TEST_kiosk-dashboard/main/streamlit/assets/mascot.png"
-            title="Numen watches all 👁‍🗨"
-            width="120"
-            style="margin-right: 20px; border-radius: 8px; opacity: 0.95;"
-        />
-    </div>
-    <p style='margin-top: -10px; color: gray; font-size: 0.9rem;'>Real-time intelligence for Bitcoin ATM network</p>
-    """,
-    unsafe_allow_html=True
-)
+st.title("🧠 Numen Kiosk Intelligence")
+    st.caption("Real-time intelligence for Bitcoin ATM network")
 
 st.markdown(
     """
-Welcome to the **Numen Dashboard** — a strategic interface for visualizing and optimizing Bitcoin ATM performance.
+Welcome to the **Numen Dashboard** — a strategic interface for visualizing and optimizing NBA Kiosk performance.
 
 **Key Features**:
 - 📊 Filter by state, performance, and clustering  
@@ -39,6 +26,17 @@ Welcome to the **Numen Dashboard** — a strategic interface for visualizing and
 )
 st.divider()
 st.markdown(
+    """
+    <div style="position: absolute; top: 10px; right: 20px; z-index: 999;">
+        <img src="https://raw.githubusercontent.com/numen1/TEST_kiosk-dashboard/main/streamlit/assets/mascot.png" 
+             title="Numen watches all 👁‍🗨"
+             width="60"
+             style="opacity: 0.92; border-radius: 8px;"
+        />
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 BREAK_EVEN = 4900
 df = pd.read_csv("data/Numen_Kiosk_Dataset.csv")
