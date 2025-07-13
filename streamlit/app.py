@@ -27,7 +27,7 @@ Welcome to the **Numen Dashboard** — a strategic interface for visualizing and
 st.divider()
 st.markdown(
     """
-    <div style="position: absolute; top: 10px; right: 20px;">
+    <div style="position: absolute; top: 10px; right: 20px; z-index: 999;">
         <img src="https://raw.githubusercontent.com/numen1/TEST_kiosk-dashboard/main/streamlit/assets/mascot.png" 
              title="Numen watches all 👁‍🗨"
              width="60"
