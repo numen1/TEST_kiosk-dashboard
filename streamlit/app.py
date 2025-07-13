@@ -6,10 +6,23 @@ import numpy as np
 from sklearn.neighbors import NearestNeighbors
 from datetime import datetime
 
-st.set_page_config(layout="wide")
-st.title("📊 TX & FL Kiosk Intelligence Dashboard")
-st.markdown(f"🕒 **Last Updated:** {datetime.now().strftime('%B %d, %Y at %I:%M %p')}")
-st.markdown("✅ Numen-Generated | Clustering | Density | Redeploy Logic")
+# ---------------- Landing Page ----------------
+st.title("🧠 Numen Kiosk Intelligence")
+st.caption("Real-time intelligence for Bitcoin ATM network")
+
+st.markdown(
+    """
+Welcome to the **Numen Dashboard** — a strategic interface for visualizing and optimizing NBA Kiosk performance.
+
+**Key Features**:
+- 📊 Filter by state, performance, and clustering
+- 💰 See live profitability metrics
+- 🔄 Flag underperforming units for redeployment
+- 📦 Export data for operations and board reviews
+
+"""
+)
+st.divider()
 
 BREAK_EVEN = 4900
 df = pd.read_csv("data/Numen_Kiosk_Dataset.csv")
