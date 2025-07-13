@@ -10,14 +10,6 @@ import os
 from PIL import Image
 
 # ---------------- Landing Page ----------------
-col_logo, col_title = st.columns([1, 8])
-with col_logo:
-    if os.path.exists("streamlit/assets/mascot.png"):
-        logo = Image.open("streamlit/assets/mascot.png")
-        st.image(logo, width=80)
-    else:
-        st.empty()  # fails silently if image is missing
-with col_title:
     st.title("🧠 Numen Kiosk Intelligence")
     st.caption("Real-time intelligence for Bitcoin ATM network")
 
