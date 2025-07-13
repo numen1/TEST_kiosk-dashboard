@@ -10,13 +10,25 @@ import os
 from PIL import Image
 
 # ---------------- Landing Page ----------------
-st.title("🧠 Numen Kiosk Intelligence")
-st.caption("Real-time intelligence for Bitcoin ATM network")
-
+st.markdown(
+    """
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+        <h1 style='margin-bottom: 0;'>Numen Kiosk Intelligence</h1>
+        <img 
+            src="https://raw.githubusercontent.com/numen1/TEST_kiosk-dashboard/main/streamlit/assets/mascot.png"
+            title="Numen watches all 👁‍🗨"
+            width="120"
+            style="margin-right: 20px; border-radius: 8px; opacity: 0.95;"
+        />
+    </div>
+    <p style='margin-top: -10px; color: gray; font-size: 0.9rem;'>Real-time intelligence for Bitcoin ATM network</p>
+    """,
+    unsafe_allow_html=True
+)
 
 st.markdown(
     """
-Welcome to the **Numen Dashboard** — a strategic interface for visualizing and optimizing NBA Kiosk performance.
+Welcome to the **Numen Dashboard** — a strategic interface for visualizing and optimizing Bitcoin ATM performance.
 
 **Key Features**:
 - 📊 Filter by state, performance, and clustering  
