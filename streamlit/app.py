@@ -10,8 +10,9 @@ import os
 from PIL import Image
 
 # ---------------- Landing Page ----------------
-    st.title("🧠 Numen Kiosk Intelligence")
-    st.caption("Real-time intelligence for Bitcoin ATM network")
+st.title("🧠 Numen Kiosk Intelligence")
+st.caption("Real-time intelligence for Bitcoin ATM network")
+
 
 st.markdown(
     """
