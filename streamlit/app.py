@@ -6,20 +6,25 @@ import numpy as np
 from sklearn.neighbors import NearestNeighbors
 from datetime import datetime
 
+
 # ---------------- Landing Page ----------------
-st.title("🧠 Numen Kiosk Intelligence")
-st.caption("Real-time intelligence for Bitcoin ATM network")
+col_logo, col_title = st.columns([1, 8])
+with col_logo:
+    logo = Image.open("streamlit/assets/mascot.png")
+    st.image(logo, width=80)
+with col_title:
+    st.title("🧠 Numen Kiosk Intelligence")
+    st.caption("Real-time intelligence for Bitcoin ATM network")
 
 st.markdown(
     """
 Welcome to the **Numen Dashboard** — a strategic interface for visualizing and optimizing NBA Kiosk performance.
 
 **Key Features**:
-- 📊 Filter by state, performance, and clustering
-- 💰 See live profitability metrics
-- 🔄 Flag underperforming units for redeployment
-- 📦 Export data for operations and board reviews
-
+- 📊 Filter by state, performance, and clustering  
+- 💰 See live profitability metrics  
+- 🔄 Flag underperforming units for redeployment  
+- 📦 Export data for operations and board reviews  
 """
 )
 st.divider()
