@@ -6,12 +6,17 @@ import numpy as np
 from sklearn.neighbors import NearestNeighbors
 from datetime import datetime
 
+import os
+from PIL import Image
 
 # ---------------- Landing Page ----------------
 col_logo, col_title = st.columns([1, 8])
 with col_logo:
-    logo = Image.open("streamlit/assets/mascot.png")
-    st.image(logo, width=80)
+    if os.path.exists("streamlit/assets/mascot.png"):
+        logo = Image.open("streamlit/assets/mascot.png")
+        st.image(logo, width=80)
+    else:
+        st.empty()  # fails silently if image is missing
 with col_title:
     st.title("🧠 Numen Kiosk Intelligence")
     st.caption("Real-time intelligence for Bitcoin ATM network")
